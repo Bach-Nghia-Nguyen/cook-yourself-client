@@ -23,14 +23,20 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     console.log("Response:", response);
+    if (response.data.data?.accessToken) {
+      api.defaults.headers.common["authorization"] =
+        "Bearer " + response.data.data.accessToken;
+      localStorage.setItem(
+        "accessToken",
+        "Bearer " + response.data.data.accessToken
+      );
+    }
     return response;
   },
   function (error) {
     error = error.response.data;
     console.log("RESPONSE ERROR", error);
-
     // Error Handling here
-
     return Promise.reject(error);
   }
 );
