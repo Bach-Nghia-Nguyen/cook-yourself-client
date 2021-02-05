@@ -43,7 +43,7 @@ const NavigationBar = () => {
   // #ffdd9c
 
   return (
-    <Navbar style={{ backgroundColor: "#569c2d" }} expand="lg">
+    <Navbar style={{ backgroundColor: "#569c2d" }} expand="lg" sticky="top">
       <Navbar.Brand as={Link} to="/" className="mr-auto">
         <img src={logo} alt="Cook Yourself" width="200px" />
       </Navbar.Brand>

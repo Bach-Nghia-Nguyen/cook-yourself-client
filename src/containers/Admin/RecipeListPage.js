@@ -119,7 +119,13 @@ const RecipeListPage = () => {
                     </Link>
                   </td>
 
-                  <td>{recipe.author.name}</td>
+                  <td>
+                    {recipe?.author ? (
+                      recipe.author.name
+                    ) : (
+                      <Badge variant="danger">Anonym</Badge>
+                    )}
+                  </td>
 
                   <td>
                     <Moment fromNow>{recipe.createdAt}</Moment>

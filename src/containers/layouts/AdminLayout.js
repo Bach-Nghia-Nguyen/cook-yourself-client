@@ -14,6 +14,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 
 import ProfilePage from "../Admin/ProfilePage";
 import RecipeListPage from "../Admin/RecipeListPage";
+import ListOfUsersPage from "../Admin/ListOfUsersPage";
 
 const AdminLayout = () => {
   return (
@@ -41,6 +42,11 @@ const AdminLayout = () => {
                 exact
                 path="/admin/recipe/edit/:id"
                 component={AddEditRecipePage}
+              />
+              <Route
+                exact
+                path="/admin/list-of-users"
+                component={ListOfUsersPage}
               />
               <Route component={NotFoundPage} />
             </Switch>

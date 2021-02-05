@@ -5,6 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 
 import RecipeCard from "../../components/RecipeCard";
 import PaginationBar from "../../components/PaginationBar";
+import LandingJumbotron from "../../components/LandingJumbotron";
 
 import { recipeActions } from "../../redux/actions";
 
@@ -28,8 +29,8 @@ const HomePage = () => {
   };
 
   return (
-    <Container>
-      <Jumbotron className="text-center">
+    <Container className="test-100-vw">
+      {/* <Jumbotron className="text-center">
         <h1>Cook Yourself</h1>
         <p>Wanna feel like a Masterchef? Try to cook those dishes!</p>
         {isAuthenticated && (
@@ -37,7 +38,9 @@ const HomePage = () => {
             <Button variant="info">Add recipe</Button>
           </Link>
         )}
-      </Jumbotron>
+      </Jumbotron> */}
+
+      <LandingJumbotron />
 
       <PaginationBar
         pageNum={pageNum}

@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 
 const RecipeCard = ({ recipe, handleClick }) => {
   return (
-    <Card onClick={() => handleClick(recipe._id)}>
+    <Card onClick={() => handleClick(recipe._id)} className="recipe-card">
       <Card.Img
         variant="top"
         src={
