@@ -20,7 +20,7 @@ import {
   faUser,
   faRegistered,
   faSignInAlt,
-  faSignOutAlt,
+  //faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 

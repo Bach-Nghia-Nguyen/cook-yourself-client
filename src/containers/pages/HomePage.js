@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container, CardColumns, Jumbotron, Button } from "react-bootstrap";
+import { Container, CardColumns } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import RecipeCard from "../../components/RecipeCard";
 import PaginationBar from "../../components/PaginationBar";
@@ -17,7 +17,7 @@ const HomePage = () => {
   const loading = useSelector((state) => state.recipe.loading);
   const recipes = useSelector((state) => state.recipe.recipes);
   const totalPageNum = useSelector((state) => state.recipe.totalPageNum);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const history = useHistory();
 
   useEffect(() => {
