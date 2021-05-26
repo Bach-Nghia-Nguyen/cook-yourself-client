@@ -29,7 +29,7 @@ const HomePage = () => {
   };
 
   return (
-    <Container className="test-100-vw">
+    <Container>
       {/* <Jumbotron className="text-center">
         <h1>Cook Yourself</h1>
         <p>Wanna feel like a Masterchef? Try to cook those dishes!</p>

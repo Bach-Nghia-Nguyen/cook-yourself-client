@@ -1,0 +1,13 @@
+/* img,
+img:focus {
+  outline: 0 !important;
+  border: 0 none !important;
+} */
+
+img {
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../stylesheets/App.css";
+
 import { Container } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 
@@ -12,23 +12,25 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import AddEditRecipePage from "../pages/AddEditRecipePage";
 import RecipeDetailPage from "../pages/RecipeDetailPage";
-import VerifyEmailPage from "../pages/VerifyEmailPage";
+//import VerifyEmailPage from "../pages/VerifyEmailPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
 import PrivateRoute from "../Routes/PrivateRoute";
+import LandingPage from "../pages/LandingPage";
 
 const PublicLayout = () => {
   return (
     <>
       <NavigationBar />
-      <Container className="page-container">
+      <div className="page-container">
         <AlertMessage />
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/landing" component={LandingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/recipes/:id" component={RecipeDetailPage} />
-          <Route exact path="/verify/:code" component={VerifyEmailPage} />
+          {/* <Route exact path="/verify/:code" component={VerifyEmailPage} /> */}
 
           <PrivateRoute
             exact
@@ -43,7 +45,7 @@ const PublicLayout = () => {
 
           <Route component={NotFoundPage} />
         </Switch>
-      </Container>
+      </div>
       <Footer />
     </>
   );

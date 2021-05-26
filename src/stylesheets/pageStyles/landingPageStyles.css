@@ -1,0 +1,124 @@
+.landing-page header img {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  filter: brightness(50%);
+
+  position: relative;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+}
+
+.landing-page header .title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  color: white;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-size: 4rem;
+}
+
+.landing-page header .start-button {
+  border: none;
+  color: white;
+  background-color: lightgreen;
+  border-radius: 5px;
+  padding: 10px 25px;
+}
+
+.landing-page .why-section {
+  height: 460px;
+  background-color: rgb(186, 210, 221);
+  font-family: "Merriweather", serif;
+
+  padding: 15px 50px;
+}
+
+.landing-page .why-section h2 {
+  margin-bottom: 30px;
+}
+
+.landing-page .why-section article {
+  width: 650px;
+  height: 350px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 3px solid black; */
+  font-weight: 700;
+}
+
+.landing-page .why-section .why-card {
+  border: 2px royalblue solid;
+  border-radius: 10px;
+  width: 220px;
+  height: 150px;
+
+  background-color: lightgreen;
+  position: relative;
+  text-align: center;
+  padding: 45px 10px;
+}
+
+.landing-page .why-section .icons {
+  width: 60px;
+  position: absolute;
+  top: -30px;
+  left: 36%;
+}
+
+.landing-page .why-section .hero2 {
+  position: relative;
+  top: -72%;
+  left: 70%;
+  width: 300px;
+  /* border: 2px solid black; */
+}
+
+.landing-page .recipe-section {
+  background-color: rgb(235, 197, 127);
+  height: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.landing-page .recipe-section .hero3 {
+  /* position: relative;
+  top: -72%;
+  left: 70%; */
+  width: 300px;
+  /* border: 2px solid black; */
+}
+
+.landing-page .recipe-section .recipe-button {
+  border: none;
+  color: white;
+  background-color: orange;
+  border-radius: 5px;
+  padding: 10px 25px;
+}
+
+.landing-page .grocery-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.landing-page .grocery-section .grocery-button {
+  border: none;
+  color: white;
+  background-color: tomato;
+  border-radius: 5px;
+  padding: 10px 25px;
+}

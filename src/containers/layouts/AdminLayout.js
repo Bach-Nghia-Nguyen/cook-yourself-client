@@ -1,5 +1,5 @@
 import React from "react";
-import "../../stylesheets/App.css";
+
 import { Container, Row, Col } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 
