@@ -6,15 +6,15 @@ const initialState = {
   loading: false,
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducers = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    // request
+    /**
+     * Get Users
+     */
     case types.GET_USERS_REQUEST:
       return { ...state, loading: true };
-
-    // success
     case types.GET_USERS_SUCCESS:
       return {
         ...state,
@@ -22,8 +22,6 @@ const userReducer = (state = initialState, action) => {
         totalPageNum: payload.totalPages,
         loading: false,
       };
-
-    // failure
     case types.GET_USERS_FAILURE:
       return { ...state, loading: false };
 
@@ -32,4 +30,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default userReducers;

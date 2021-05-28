@@ -32,7 +32,7 @@ const ProfilePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, avatarUrl } = formData;
-    dispatch(authActions.updateProfile(name, avatarUrl));
+    dispatch(authActions.updateProfile({ name, avatarUrl }));
     setEditable(false);
   };
 
@@ -64,6 +64,9 @@ const ProfilePage = () => {
           <h4>Profile Page</h4>
         </Col>
         <Col className="d-flex justify-content-end align-items-start">
+          <Button variant="warning" className="change-password-btn">
+            Change Password
+          </Button>
           <Button variant="primary" onClick={() => setEditable(true)}>
             <FontAwesomeIcon icon="edit" size="1x" /> Edit
           </Button>
@@ -85,7 +88,7 @@ const ProfilePage = () => {
                       <img
                         src={formData.avatarUrl}
                         alt="User avatar"
-                        className="avatar-lg"
+                        className="avatar-image"
                       />
                     </div>
                   )}

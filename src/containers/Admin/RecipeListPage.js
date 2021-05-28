@@ -59,7 +59,7 @@ const RecipeListPage = () => {
 
   useEffect(() => {
     dispatch(
-      recipeActions.recipesRequest(pageNum, 10, query, myRecipeOnly, sortBy)
+      recipeActions.getRecipes(pageNum, 10, query, myRecipeOnly, sortBy)
     );
   }, [dispatch, pageNum, query, sortBy, myRecipeOnly]);
 

@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { recipeActions } from "../../redux/actions";
 import { routeActions } from "../../redux/actions";
 
-const AddEditRecipePage = () => {
+const RecipeEditorPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     images: [],
+    time: "",
+    portion: "",
   });
   const loading = useSelector((state) => state.recipe.loading);
   const dispatch = useDispatch();
@@ -44,18 +47,51 @@ const AddEditRecipePage = () => {
     }
   };
 
+  const uploadWidget = () => {
+    window.cloudinary.openUploadWidget(
+      {
+        cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+        upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
+        tags: ["CookYourself", "recipeImages"],
+      },
+      function (error, result) {
+        if (
+          result.data &&
+          result.data.info &&
+          result.data.info.files &&
+          result.data.info.files.length
+        ) {
+          setFormData({
+            ...formData,
+            images: result.data.info.files.map(
+              (res) => res.uploadInfo.secure_url
+            ),
+          });
+        }
+        if (error) {
+          console.log("Errors in images: ", error);
+        }
+      }
+    );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, description, images } = formData;
+    const { name, description, images, time, portion } = formData;
+    console.log("formData is:", formData);
     if (addOrEdit === "Add") {
-      dispatch(recipeActions.createNewRecipe(name, description, images));
+      dispatch(
+        recipeActions.createNewRecipe(name, description, images, time, portion)
+      );
     } else if (addOrEdit === "Edit") {
       dispatch(
         recipeActions.updateRecipe(
           selectedRecipe._id,
           name,
           description,
-          images
+          images,
+          time,
+          portion
         )
       );
     }
@@ -109,7 +145,46 @@ const AddEditRecipePage = () => {
           />
         </Form.Group>
 
+        <Form.Group controlId="recipeTime">
+          <Form.Label>Total time</Form.Label>
+          <Form.Control
+            required
+            type="number"
+            placeholder="Enter time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="recipePortion">
+          <Form.Label>Portion serving</Form.Label>
+          <Form.Control
+            required
+            type="number"
+            placeholder="Enter number of people"
+            name="portion"
+            value={formData.portion}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
         {/* Upload image */}
+        <Form.Group>
+          {formData.images &&
+            formData.images.length > 0 &&
+            formData.images.map((image) => (
+              <img
+                src={image}
+                key={image}
+                width="120px"
+                alt="blog images"
+              ></img>
+            ))}
+          <Button variant="info" onClick={uploadWidget}>
+            <FontAwesomeIcon icon="image" size="1x" /> {addOrEdit} Image
+          </Button>
+        </Form.Group>
 
         <ButtonGroup className="d-flex mb-3">
           {loading ? (
@@ -144,4 +219,4 @@ const AddEditRecipePage = () => {
   );
 };
 
-export default AddEditRecipePage;
+export default RecipeEditorPage;

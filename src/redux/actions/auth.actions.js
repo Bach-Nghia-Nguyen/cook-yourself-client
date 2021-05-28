@@ -3,64 +3,25 @@ import api from "../../apiService";
 import { routeActions } from "./route.actions";
 import { toast } from "react-toastify";
 
-const loginRequest = ({ email, password }) => async (dispatch) => {
-  dispatch({ type: types.LOGIN_REQUEST, payload: null });
+const register =
+  ({ name, email, password, avatarUrl }) =>
+  async (dispatch) => {
+    dispatch({ type: types.REGISTER_REQUEST, payload: null });
 
-  try {
-    const res = await api.post("/auth/login", { email, password });
-    const name = res.data.data.user.name;
-    dispatch({ type: types.LOGIN_SUCCESS, payload: res.data.data });
-    toast.success(`Welcome ${name}`);
-    api.defaults.headers.common["authorization"] =
-      "Bearer" + res.data.data.accessToken;
-  } catch (error) {
-    console.log(error);
-    dispatch({ type: types.LOGIN_FAILURE, payload: error });
-  }
-};
-
-const loginFacebookRequest = (access_token) => async (dispatch) => {
-  dispatch({ type: types.LOGIN_FACEBOOK_REQUEST, payload: null });
-
-  try {
-    const res = await api.post("/auth/login/facebook", { access_token });
-    const name = res.data.data.user.name;
-    toast.success(`Welcome ${name}`);
-    dispatch({ type: types.LOGIN_FACEBOOK_SUCCESS, payload: res.data.data });
-    api.defaults.headers.common["authorization"] =
-      "Bearer " + res.data.data.accessToken;
-  } catch (error) {
-    dispatch({ type: types.LOGIN_FACEBOOK_FAILURE, payload: error });
-  }
-};
-
-const loginGoogleRequest = (access_token) => async (dispatch) => {
-  dispatch({ type: types.LOGIN_GOOGLE_REQUEST, payload: null });
-
-  try {
-    const res = await api.post("/auth/login/google", { access_token });
-    const name = res.data.data.user.name;
-    toast.success(`Welcome ${name}`);
-    dispatch({ type: types.LOGIN_GOOGLE_SUCCESS, payload: res.data.data });
-    api.defaults.headers.common["authorization"] =
-      "Bearer " + res.data.data.accessToken;
-  } catch (error) {
-    dispatch({ type: types.LOGIN_GOOGLE_FAILURE, payload: error });
-  }
-};
-
-const register = ({ name, email, password, avatarUrl }) => async (dispatch) => {
-  dispatch({ type: types.REGISTER_REQUEST, payload: null });
-
-  try {
-    const res = await api.post("/users", { name, email, password, avatarUrl });
-    dispatch({ type: types.REGISTER_SUCCESS, payload: res.data.data });
-    dispatch(routeActions.redirect("/login"));
-    toast.success(`Thank you for your registration, ${name}!`);
-  } catch (error) {
-    dispatch({ type: types.REGISTER_FAILURE, payload: error });
-  }
-};
+    try {
+      const res = await api.post("/users", {
+        name,
+        email,
+        password,
+        avatarUrl,
+      });
+      dispatch({ type: types.REGISTER_SUCCESS, payload: res.data.data });
+      dispatch(routeActions.redirect("/login"));
+      toast.success(`Thank you for your registration, ${name}!`);
+    } catch (error) {
+      dispatch({ type: types.REGISTER_FAILURE, payload: error });
+    }
+  };
 
 const verifyEmail = (code) => async (dispatch) => {
   dispatch({ type: types.VERIFY_EMAIL_REQUEST, payload: null });
@@ -77,15 +38,50 @@ const verifyEmail = (code) => async (dispatch) => {
   }
 };
 
-const updateProfile = (name, avatarUrl) => async (dispatch) => {
-  dispatch({ type: types.UPDATE_PROFILE_REQUEST, payload: null });
+const login = (email, password) => async (dispatch) => {
+  dispatch({ type: types.LOGIN_REQUEST, payload: null });
 
   try {
-    const res = await api.put("/users", { name, avatarUrl });
-    dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data.data });
-    toast.success(`Your profile has been updated.`);
+    const res = await api.post("/auth/login", { email, password });
+    const name = res.data.data.user.name;
+    dispatch({ type: types.LOGIN_SUCCESS, payload: res.data.data });
+
+    api.defaults.headers.common["authorization"] =
+      "Bearer" + res.data.data.accessToken;
+
+    toast.success(`Welcome back, ${name}`);
   } catch (error) {
-    dispatch({ type: types.UPDATE_PROFILE_FAILURE, payload: error });
+    dispatch({ type: types.LOGIN_FAILURE, payload: error });
+  }
+};
+
+const loginFacebook = (access_token) => async (dispatch) => {
+  dispatch({ type: types.LOGIN_FACEBOOK_REQUEST, payload: null });
+
+  try {
+    const res = await api.post("/auth/login/facebook", { access_token });
+    const name = res.data.data.user.name;
+    toast.success(`Welcome ${name}`);
+    dispatch({ type: types.LOGIN_FACEBOOK_SUCCESS, payload: res.data.data });
+    api.defaults.headers.common["authorization"] =
+      "Bearer " + res.data.data.accessToken;
+  } catch (error) {
+    dispatch({ type: types.LOGIN_FACEBOOK_FAILURE, payload: error });
+  }
+};
+
+const loginGoogle = (access_token) => async (dispatch) => {
+  dispatch({ type: types.LOGIN_GOOGLE_REQUEST, payload: null });
+
+  try {
+    const res = await api.post("/auth/login/google", { access_token });
+    const name = res.data.data.user.name;
+    toast.success(`Welcome ${name}`);
+    dispatch({ type: types.LOGIN_GOOGLE_SUCCESS, payload: res.data.data });
+    api.defaults.headers.common["authorization"] =
+      "Bearer " + res.data.data.accessToken;
+  } catch (error) {
+    dispatch({ type: types.LOGIN_GOOGLE_FAILURE, payload: error });
   }
 };
 
@@ -102,6 +98,20 @@ const getCurrentUser = (accessToken) => async (dispatch) => {
   }
 };
 
+const updateProfile =
+  ({ name, avatarUrl, password }) =>
+  async (dispatch) => {
+    dispatch({ type: types.UPDATE_PROFILE_REQUEST, payload: null });
+
+    try {
+      const res = await api.put("/users", { name, avatarUrl, password });
+      dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data.data });
+      toast.success(`Your profile has been updated.`);
+    } catch (error) {
+      dispatch({ type: types.UPDATE_PROFILE_FAILURE, payload: error });
+    }
+  };
+
 const logout = () => (dispatch) => {
   delete api.defaults.headers.common["authorization"];
   localStorage.setItem("accessToken", "");
@@ -109,9 +119,9 @@ const logout = () => (dispatch) => {
 };
 
 export const authActions = {
-  loginRequest,
-  loginFacebookRequest,
-  loginGoogleRequest,
+  login,
+  loginFacebook,
+  loginGoogle,
   register,
   verifyEmail,
   updateProfile,

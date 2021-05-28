@@ -21,6 +21,7 @@ import {
   faRegistered,
   faSignInAlt,
   //faSignOutAlt,
+  faImage,
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
@@ -34,8 +35,9 @@ library.add(
   faCheckSquare,
   faUser,
   faRegistered,
-  faSignInAlt
+  faSignInAlt,
   // faSignOutAlt
+  faImage
 );
 
 const App = () => {

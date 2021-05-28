@@ -8,7 +8,7 @@ import NavigationBar from "../../components/NavigationBar";
 import Footer from "../../components/Footer";
 import AdminSideMenu from "../../components/AdminSideMenu";
 
-import AddEditRecipePage from "../pages/AddEditRecipePage";
+import RecipeEditorPage from "../pages/RecipeEditorPage";
 import RecipeDetailPage from "../pages/RecipeDetailPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
@@ -36,12 +36,12 @@ const AdminLayout = () => {
               <Route
                 exact
                 path="/admin/recipe/add"
-                component={AddEditRecipePage}
+                component={RecipeEditorPage}
               />
               <Route
                 exact
                 path="/admin/recipe/edit/:id"
-                component={AddEditRecipePage}
+                component={RecipeEditorPage}
               />
               <Route
                 exact

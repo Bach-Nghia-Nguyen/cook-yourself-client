@@ -34,15 +34,15 @@ const LoginPage = () => {
       setErrors({ ...errors, password: "Password must be longer than 3" });
       return;
     }
-    dispatch(authActions.loginRequest({ email, password }));
+    dispatch(authActions.login(email, password));
   };
 
-  const loginWihFacebook = (response) => {
-    dispatch(authActions.loginFacebookRequest(response.accessToken));
+  const loginWithFacebook = (response) => {
+    dispatch(authActions.loginFacebook(response.accessToken));
   };
 
   const loginWithGoogle = (response) => {
-    dispatch(authActions.loginGoogleRequest(response.accessToken));
+    dispatch(authActions.loginGoogle(response.accessToken));
   };
 
   if (isAuthenticated) return <Redirect to="/" />;
@@ -116,7 +116,7 @@ const LoginPage = () => {
                 appId={FB_APP_ID}
                 icon="fa-facebook"
                 fields="name, email, picture"
-                callback={loginWihFacebook}
+                callback={loginWithFacebook}
                 onFailure={(err) => {
                   console.log("FB LOGIN ERROR:", err);
                 }}

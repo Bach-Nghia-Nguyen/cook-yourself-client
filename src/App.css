@@ -3,6 +3,7 @@
 @import url("./stylesheets/globalStyles.css");
 @import url("./stylesheets/utilityStyles.css");
 @import url("./stylesheets/pageStyles/landingPageStyles.css");
+@import url("./stylesheets/pageStyles/profilePageStyles.css");
 
 /* Page */
 .page-container {

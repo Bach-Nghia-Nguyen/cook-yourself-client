@@ -47,7 +47,7 @@ const ListOfUsersPage = () => {
   };
 
   useEffect(() => {
-    dispatch(userActions.usersRequest(pageNum, 10, query, sortBy));
+    dispatch(userActions.getUsers(pageNum, 10, query, sortBy));
   }, [dispatch, pageNum, query, sortBy]);
 
   return (
