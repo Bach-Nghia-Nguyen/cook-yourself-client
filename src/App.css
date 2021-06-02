@@ -2,8 +2,21 @@
 
 @import url("./stylesheets/globalStyles.css");
 @import url("./stylesheets/utilityStyles.css");
+
+/* page styles */
 @import url("./stylesheets/pageStyles/landingPageStyles.css");
 @import url("./stylesheets/pageStyles/profilePageStyles.css");
+@import url("./stylesheets/pageStyles/loginPageStyles.css");
+@import url("./stylesheets/pageStyles/recipeDetailPage.css");
+@import url("./stylesheets/pageStyles/recipeEditorPageStyles.css");
+@import url("./stylesheets/pageStyles/registerPageStyles.css");
+
+/* component styles */
+@import url("./stylesheets/componentStyles/recipeOutlineCardStyles.css");
+@import url("./stylesheets/componentStyles/preloaderStyles.css");
+@import url("./stylesheets/componentStyles/commentFormStyles.css");
+@import url("./stylesheets/componentStyles/commentListStyles.css");
+@import url("./stylesheets/componentStyles/changePasswordModalStyles.css");
 
 /* Page */
 .page-container {

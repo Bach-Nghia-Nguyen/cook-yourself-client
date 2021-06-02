@@ -1,0 +1,47 @@
+.ingredient-input-box {
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.ingredient-input {
+  max-width: 220px;
+}
+
+.ingredient-input,
+.ingredient-remove-btn {
+  margin-right: 30px;
+}
+
+.direction-input-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.direction-input {
+  max-width: 600px;
+  margin-right: 10px;
+}
+
+.direction-btn-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.direction-remove-btn,
+.direction-add-btn {
+  width: 90px;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.direction-remove-btn {
+  background-color: brown;
+}
+
+.direction-add-btn {
+  background-color: green;
+}

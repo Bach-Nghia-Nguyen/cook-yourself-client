@@ -20,8 +20,11 @@ import {
   faUser,
   faRegistered,
   faSignInAlt,
-  //faSignOutAlt,
+  faSignOutAlt,
   faImage,
+  faChartLine,
+  faEye,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
@@ -36,8 +39,11 @@ library.add(
   faUser,
   faRegistered,
   faSignInAlt,
-  // faSignOutAlt
-  faImage
+  faSignOutAlt,
+  faImage,
+  faChartLine,
+  faEye,
+  faEyeSlash
 );
 
 const App = () => {

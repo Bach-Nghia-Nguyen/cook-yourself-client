@@ -5,6 +5,7 @@ import * as reactionTypes from "../constants/reaction.constants";
 const initialState = {
   recipes: [],
   totalPageNum: 1,
+  currentPage: 1,
   selectedRecipe: null,
   subLoading: false,
   loading: false,
@@ -121,8 +122,8 @@ const recipeReducers = (state = initialState, action) => {
     case types.DELETE_RECIPE_SUCCESS:
       return {
         ...state,
-        loading: false,
         selectedRecipe: {},
+        loading: false,
       };
     case types.DELETE_RECIPE_FAILURE:
       return { ...state, loading: false };

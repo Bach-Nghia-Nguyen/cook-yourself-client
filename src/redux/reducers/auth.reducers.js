@@ -1,9 +1,12 @@
 import * as types from "../constants/auth.constants";
+const isAuthenticated = !!localStorage.getItem("accessToken");
 const initialState = {
   user: {},
-  isAuthenticated: null,
+  isAuthenticated,
   accessToken: localStorage.getItem("accessToken"),
   loading: false,
+  isPasswordRight: false,
+  subLoading: false,
 };
 
 const authReducers = (state = initialState, action) => {
@@ -57,9 +60,28 @@ const authReducers = (state = initialState, action) => {
     case types.UPDATE_PROFILE_REQUEST:
       return { ...state, loading: true };
     case types.UPDATE_PROFILE_SUCCESS:
-      return { ...state, loading: false, user: { ...state.user, payload } };
+      return {
+        ...state,
+        loading: false,
+        user: { ...state.user, payload },
+        isPasswordRight: false,
+      };
     case types.UPDATE_PROFILE_FAILURE:
       return { ...state, loading: false };
+
+    /**
+     * Validate current password
+     */
+    case types.VALIDATE_CURRENT_PASSWORD_REQUEST:
+      return { ...state, subLoading: true, isPasswordRight: false };
+    case types.VALIDATE_CURRENT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isPasswordRight: true,
+        subLoading: false,
+      };
+    case types.VALIDATE_CURRENT_PASSWORD_FAILURE:
+      return { ...state, subLoading: false, isPasswordRight: false };
 
     /**
      * Log Out

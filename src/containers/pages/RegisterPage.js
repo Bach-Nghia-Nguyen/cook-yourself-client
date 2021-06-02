@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { authActions } from "../../redux/actions";
 import { routeActions } from "../../redux/actions";
-
+import cameraIcon from "../../images/icons/camera.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const RegisterPage = () => {
@@ -40,7 +40,12 @@ const RegisterPage = () => {
       setErrors({ ...errors, password2: "Passwords do not match" });
       return;
     }
-    dispatch(authActions.register({ name, email, password, avatarUrl }));
+
+    if (avatarUrl) {
+      dispatch(authActions.register({ name, email, password, avatarUrl }));
+    } else {
+      dispatch(authActions.register({ name, email, password }));
+    }
   };
 
   const uploadWidget = () => {
@@ -48,13 +53,18 @@ const RegisterPage = () => {
       {
         cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
         upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
-        tags: ["recipe", "userAvatar"],
+        cropping: true,
+        tags: ["CookYourself", "userAvatar"],
       },
       function (error, result) {
-        if (error) console.log(error);
-        if (result && result.length && !error) {
-          setFormData({ ...formData, avatarUrl: result[0].secure_url });
+        if (result) console.log("result:", result);
+        if (result.event === "success" && result.info) {
+          setFormData({
+            ...formData,
+            avatarUrl: result.info.secure_url,
+          });
         }
+        if (error) console.log("Errors in register avatar: ", error);
       }
     );
   };
@@ -72,7 +82,7 @@ const RegisterPage = () => {
   }, [dispatch, history, redirectTo]);
 
   return (
-    <Container>
+    <Container className="register-page">
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <div className="text-center mb-3">
@@ -83,25 +93,21 @@ const RegisterPage = () => {
           </div>
 
           <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <div className="text-center">
-                {formData.avatarUrl && (
-                  <div className="mb-3">
-                    <img
-                      src={formData.avatarUrl}
-                      className="avatar-lg"
-                      alt="avatar"
-                    />
-                  </div>
-                )}
-                <Button
-                  variant="info"
-                  onClick={uploadWidget}
-                  className="btn-block w-50"
-                >
-                  Add avatar
-                </Button>
+            <Form.Group className="upload-avatar">
+              {/* <button onClick={uploadWidget} >
+                Add avatar
+              </button> */}
+              <div onClick={uploadWidget} className="upload-avatar-btn">
+                <img src={cameraIcon} alt="camera" className="camera-btn" />
               </div>
+
+              {formData.avatarUrl && (
+                <img
+                  src={formData.avatarUrl}
+                  className="avatar-img"
+                  alt="avatar"
+                />
+              )}
             </Form.Group>
 
             <Form.Group>

@@ -4,15 +4,30 @@ import { routeActions } from "./route.actions";
 import { toast } from "react-toastify";
 
 const createNewRecipe =
-  (name, description, images, time, portion) => async (dispatch) => {
+  (
+    name,
+    description,
+    images,
+    preparation_time,
+    cooking_time,
+    portion,
+    dish_type,
+    ingredients,
+    directions
+  ) =>
+  async (dispatch) => {
     dispatch({ type: types.CREATE_RECIPE_REQUEST, payload: null });
     try {
       const res = await api.post("/recipes", {
         name,
         description,
         images,
-        time,
+        preparation_time,
+        cooking_time,
         portion,
+        dish_type,
+        ingredients,
+        directions,
       });
 
       dispatch({
@@ -27,7 +42,7 @@ const createNewRecipe =
   };
 
 const getRecipes =
-  (pageNum = 1, limit = 10, query = null, ownerId = null, sortBy = null) =>
+  (pageNum = 1, limit = 3, query = null, ownerId = null, sortBy = null) =>
   async (dispatch) => {
     dispatch({ type: types.GET_RECIPES_REQUEST, payload: null });
     try {
@@ -70,13 +85,31 @@ const getSingleRecipe = (recipeId) => async (dispatch) => {
 };
 
 const updateRecipe =
-  (recipeId, name, description, images) => async (dispatch) => {
+  (
+    recipeId,
+    name,
+    description,
+    images,
+    dish_type,
+    preparation_time,
+    cooking_time,
+    portion,
+    ingredients,
+    directions
+  ) =>
+  async (dispatch) => {
     dispatch({ type: types.UPDATE_RECIPE_REQUEST, payload: null });
     try {
       const res = await api.put(`/recipes/${recipeId}`, {
         name,
         description,
         images,
+        dish_type,
+        preparation_time,
+        cooking_time,
+        portion,
+        ingredients,
+        directions,
       });
 
       dispatch({
@@ -97,7 +130,8 @@ const deleteRecipe = (recipeId) => async (dispatch) => {
 
     dispatch({ type: types.DELETE_RECIPE_SUCCESS, payload: res.data });
 
-    dispatch(routeActions.redirect("/"));
+    dispatch(routeActions.redirect("/recipes"));
+
     toast.success("The recipe has been deleted!");
   } catch (error) {
     dispatch({ type: types.DELETE_RECIPE_FAILURE, payload: error });

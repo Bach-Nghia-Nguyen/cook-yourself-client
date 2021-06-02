@@ -4,9 +4,9 @@ import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { authActions } from "../../redux/actions";
-import { FB_APP_ID, GOOGLE_CLIENT_ID } from "../../config/constants";
-import FacebookLogin from "react-facebook-login";
-import { GoogleLogin } from "react-google-login";
+// import { FB_APP_ID, GOOGLE_CLIENT_ID } from "../../config/constants";
+// import FacebookLogin from "react-facebook-login";
+// import { GoogleLogin } from "react-google-login";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -37,13 +37,13 @@ const LoginPage = () => {
     dispatch(authActions.login(email, password));
   };
 
-  const loginWithFacebook = (response) => {
-    dispatch(authActions.loginFacebook(response.accessToken));
-  };
+  // const loginWithFacebook = (response) => {
+  //   dispatch(authActions.loginFacebook(response.accessToken));
+  // };
 
-  const loginWithGoogle = (response) => {
-    dispatch(authActions.loginGoogle(response.accessToken));
-  };
+  // const loginWithGoogle = (response) => {
+  //   dispatch(authActions.loginGoogle(response.accessToken));
+  // };
 
   if (isAuthenticated) return <Redirect to="/" />;
 
@@ -111,7 +111,7 @@ const LoginPage = () => {
 
             <hr />
 
-            <div>
+            {/* <div>
               <FacebookLogin
                 appId={FB_APP_ID}
                 icon="fa-facebook"
@@ -149,7 +149,7 @@ const LoginPage = () => {
                 }}
                 cookiePolicy="single_host_origin"
               />
-            </div>
+            </div> */}
 
             <p>
               Don't have an account? <Link to="/register">Register here</Link>

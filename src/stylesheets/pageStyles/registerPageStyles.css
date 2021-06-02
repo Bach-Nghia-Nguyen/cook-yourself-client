@@ -1,0 +1,24 @@
+.register-page .upload-avatar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.register-page .upload-avatar .upload-avatar-btn {
+  cursor: pointer;
+}
+
+.register-page .upload-avatar .camera-btn {
+  /* background-color: teal;
+  border: none;
+  color: aliceblue;
+  padding: 10px 15px; */
+  width: 60px;
+}
+
+.register-page .avatar-img {
+  width: 100px;
+  border-radius: 10px;
+  border: 2px seagreen solid;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -13,9 +13,12 @@ import { authActions } from "../../redux/actions";
 
 import { ClipLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useHistory } from "react-router";
+import ChangePasswordModal from "../../components/ChangePasswordModal";
 
 const ProfilePage = () => {
   const currentUser = useSelector((state) => state.auth.user);
+
   const loading = useSelector((state) => state.auth.loading);
   const [editable, setEditable] = useState(false);
   const [formData, setFormData] = useState({
@@ -23,20 +26,44 @@ const ProfilePage = () => {
     email: currentUser.email,
     avatarUrl: currentUser.avatarUrl,
   });
-  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleClosePasswordModal = () => setShowModal(false);
+  const handleShowPasswordModal = () => setShowModal(true);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, avatarUrl } = formData;
     dispatch(authActions.updateProfile({ name, avatarUrl }));
     setEditable(false);
+    // reload the page after submit to render newly updated user info
+    history.go(0);
+  };
+
+  useEffect(() => {
+    // the user info did not lose when refresh the page
+    if (currentUser) {
+      setFormData({
+        name: currentUser.name,
+        email: currentUser.email,
+        avatarUrl: currentUser.avatarUrl,
+      });
+    }
+  }, [currentUser]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleCancel = () => {
+    setFormData({
+      ...formData,
+      name: currentUser.name,
+      email: currentUser.email,
+      avatarUrl: currentUser.avatarUrl,
+    });
     setEditable(false);
   };
 
@@ -45,13 +72,23 @@ const ProfilePage = () => {
       {
         cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
         upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
-        tags: ["recipe", "userAvatar"],
+        cropping: true,
+        tags: ["CookYourself", "userAvatar"],
       },
       function (error, result) {
-        if (error) console.log(error);
-        if (result && result.length && !error) {
-          setFormData({ ...formData, avatarUrl: result[0].secure_url });
+        console.log("result update avatar is: ", result);
+        if (
+          result.data &&
+          result.data.info &&
+          result.data.info.files &&
+          result.data.info.files.length
+        ) {
+          setFormData({
+            ...formData,
+            avatarUrl: result.data.info.files[0].uploadInfo.secure_url,
+          });
         }
+        if (error) console.log("Errors in profile photo: ", error);
       }
     );
   };
@@ -64,7 +101,12 @@ const ProfilePage = () => {
           <h4>Profile Page</h4>
         </Col>
         <Col className="d-flex justify-content-end align-items-start">
-          <Button variant="warning" className="change-password-btn">
+          <Button
+            variant="warning"
+            className="change-password-btn"
+            onClick={handleShowPasswordModal}
+            disabled={!editable}
+          >
             Change Password
           </Button>
           <Button variant="primary" onClick={() => setEditable(true)}>
@@ -112,7 +154,7 @@ const ProfilePage = () => {
                     required
                     placeholder="Name"
                     name="name"
-                    value={formData.name}
+                    value={formData?.name}
                     onChange={handleChange}
                     disabled={!editable}
                   />
@@ -129,7 +171,7 @@ const ProfilePage = () => {
                     required
                     placeholder="Email"
                     name="email"
-                    value={formData.email}
+                    value={formData?.email}
                     disabled={true}
                   />
                 </Col>
@@ -171,6 +213,11 @@ const ProfilePage = () => {
           )}
         </Col>
       </Row>
+
+      <ChangePasswordModal
+        showModal={showModal}
+        handleClosePasswordModal={handleClosePasswordModal}
+      />
     </Container>
   );
 };

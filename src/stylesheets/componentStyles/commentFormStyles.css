@@ -1,0 +1,30 @@
+.comment-form {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.comment-form .comment-form-group {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 880px;
+}
+
+.comment-form .profile-picture-icon {
+  width: 30px;
+}
+
+.comment-form .comment-input {
+  width: 520px;
+}
+
+.comment-form .submit-comment-btn {
+  border: none;
+  padding: 6px 8px;
+  width: 90px;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+}

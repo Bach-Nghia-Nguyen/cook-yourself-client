@@ -3,13 +3,13 @@ import { Container, CardColumns } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import RecipeCard from "../../components/RecipeCard";
+import RecipeOutlineCard from "../../components/RecipeOutlineCard";
 import PaginationBar from "../../components/PaginationBar";
 import LandingJumbotron from "../../components/LandingJumbotron";
 
 import { recipeActions } from "../../redux/actions";
 
-import { ClipLoader } from "react-spinners";
+import Preloader from "../../components/Preloader";
 
 const RecipesPage = () => {
   const [pageNum, setPageNum] = useState(1);
@@ -51,14 +51,15 @@ const RecipesPage = () => {
 
       {loading ? (
         <div className="text-center">
-          <ClipLoader color="#f86c6b" size={150} loading={loading} />
+          {/* <ClipLoader color="#f86c6b" size={150} loading={loading} /> */}
+          <Preloader />
         </div>
       ) : (
         <>
           {recipes.length ? (
             <CardColumns>
               {recipes.map((recipe) => (
-                <RecipeCard
+                <RecipeOutlineCard
                   recipe={recipe}
                   key={recipe._id}
                   handleClick={handleClickOnRecipe}

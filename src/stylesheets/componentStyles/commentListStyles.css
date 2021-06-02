@@ -1,0 +1,33 @@
+.comment-section {
+  margin-top: 25px;
+  border: 1px solid hotpink;
+  padding: 0 20px;
+}
+
+.comment-section .comment-list .comment {
+  margin-top: 18px;
+}
+
+.comment-list .comment .author {
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-list .comment .profile-picture-icon {
+  border-radius: 50%;
+  width: 35px;
+}
+
+.comment-list .comment .author .comment_date {
+  justify-self: flex-end;
+}
+
+.comment-list .comment .comment-body {
+  /* height: 50px; */
+  font-size: 20px;
+  border-radius: 5px;
+  width: 600px;
+  background-color: rgba(230, 230, 230, 0.63);
+  margin-left: 35px;
+}

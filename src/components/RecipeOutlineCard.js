@@ -1,14 +1,14 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const RecipeCard = ({ recipe, handleClick }) => {
+const RecipeOutlineCard = ({ recipe, handleClick }) => {
   return (
     <Card onClick={() => handleClick(recipe._id)} className="recipe-card">
       <Card.Img
         variant="top"
         src={
           recipe?.images?.length
-            ? recipe.images[0]
+            ? recipe.images[recipe.images.length - 1]
             : "https://via.placeholder.com/160x100"
         }
       />
@@ -22,13 +22,22 @@ const RecipeCard = ({ recipe, handleClick }) => {
         </Card.Text>
       </Card.Body>
 
-      <Card.Footer>
+      <Card.Footer className="recipe-card-footer">
+        <img
+          src={recipe?.author?.avatarUrl}
+          alt="profile-icon"
+          className="profile-picture-icon"
+        />
         <small className="text-muted">
-          <span className="text-muted">@{recipe?.author?.name} wrote </span>
+          <span className="text-muted author-name">
+            {" "}
+            {recipe?.author?.name}{" "}
+          </span>{" "}
+          wrote
         </small>
       </Card.Footer>
     </Card>
   );
 };
 
-export default RecipeCard;
+export default RecipeOutlineCard;

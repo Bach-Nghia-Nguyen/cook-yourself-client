@@ -47,11 +47,12 @@ const login = (email, password) => async (dispatch) => {
     dispatch({ type: types.LOGIN_SUCCESS, payload: res.data.data });
 
     api.defaults.headers.common["authorization"] =
-      "Bearer" + res.data.data.accessToken;
+      "Bearer " + res.data.data.accessToken;
 
     toast.success(`Welcome back, ${name}`);
   } catch (error) {
     dispatch({ type: types.LOGIN_FAILURE, payload: error });
+    toast.error("Incorrect email or password!");
   }
 };
 
@@ -112,6 +113,22 @@ const updateProfile =
     }
   };
 
+const validateCurrentPassword = (password) => async (dispatch) => {
+  dispatch({ type: types.VALIDATE_CURRENT_PASSWORD_REQUEST, payload: null });
+  try {
+    const res = await api.post("/auth/validate_password", { password });
+    console.log("validate result:", res);
+    dispatch({
+      type: types.VALIDATE_CURRENT_PASSWORD_SUCCESS,
+      payload: res.data.data,
+    });
+    toast.success("The password is right!!!");
+  } catch (error) {
+    dispatch({ type: types.VALIDATE_CURRENT_PASSWORD_FAILURE, payload: error });
+    toast.error("Wrong password! Try again");
+  }
+};
+
 const logout = () => (dispatch) => {
   delete api.defaults.headers.common["authorization"];
   localStorage.setItem("accessToken", "");
@@ -126,5 +143,6 @@ export const authActions = {
   verifyEmail,
   updateProfile,
   getCurrentUser,
+  validateCurrentPassword,
   logout,
 };
