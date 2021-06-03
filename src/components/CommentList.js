@@ -1,5 +1,6 @@
 import React from "react";
 import Moment from "react-moment";
+import ReactionEmoji from "./ReactionEmoji";
 
 const CommentContent = ({ comment }) => {
   return (
@@ -13,7 +14,12 @@ const CommentContent = ({ comment }) => {
           />
           <span className="comment_author">{comment.user.name}</span>
         </div>
-
+        <ReactionEmoji
+          reactionsData={comment.reactions}
+          targetType="Comment"
+          targetId={comment._id}
+          size="1x"
+        />
         <Moment fromNow>{comment.createdAt}</Moment>
       </div>
 

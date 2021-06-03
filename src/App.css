@@ -10,6 +10,7 @@
 @import url("./stylesheets/pageStyles/recipeDetailPage.css");
 @import url("./stylesheets/pageStyles/recipeEditorPageStyles.css");
 @import url("./stylesheets/pageStyles/registerPageStyles.css");
+@import url("./stylesheets/pageStyles/recipesPageStyles.css");
 
 /* component styles */
 @import url("./stylesheets/componentStyles/recipeOutlineCardStyles.css");
@@ -17,36 +18,31 @@
 @import url("./stylesheets/componentStyles/commentFormStyles.css");
 @import url("./stylesheets/componentStyles/commentListStyles.css");
 @import url("./stylesheets/componentStyles/changePasswordModalStyles.css");
+@import url("./stylesheets/componentStyles/footerStyles.css");
+@import url("./stylesheets/componentStyles/navigationBarStyles.css");
+@import url("./stylesheets/componentStyles/newSearchBarStyles.css");
+@import url("./stylesheets/componentStyles/landingJumbotronStyles.css");
+@import url("./stylesheets/componentStyles/reactionEmojiStyles.css");
 
 /* Page */
 .page-container {
-  /* display: flex;
-  flex-direction: column; */
-  min-height: 100vh;
-  margin-bottom: 80px;
+  min-height: 90vh;
 }
 
 .content-wrap {
   flex: 1;
 }
 
-.jumbotron-landing {
-  /* width: 100vw; */
-  background-image: url("./images/cooking.jpg");
-  background-repeat: no-repeat;
-  /* background-size: contain; */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+}
+
+.dashboard .dashboard-page {
+  width: 60%;
 }
 
 /* Main footer */
-.main-footer-container {
-  color: #000;
-  background-color: #569c2d;
-  padding-top: 3em;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-}
-
 .test-100-vw {
   width: 100vw;
 }

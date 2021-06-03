@@ -94,7 +94,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <Container fluid>
+    <Container className="dashboard-page">
       <br />
       <Row>
         <Col>

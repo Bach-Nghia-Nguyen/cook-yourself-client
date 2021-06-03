@@ -42,7 +42,7 @@ const createNewRecipe =
   };
 
 const getRecipes =
-  (pageNum = 1, limit = 3, query = null, ownerId = null, sortBy = null) =>
+  (pageNum = 1, limit = 9, query = null, ownerId = null, sortBy = null) =>
   async (dispatch) => {
     dispatch({ type: types.GET_RECIPES_REQUEST, payload: null });
     try {

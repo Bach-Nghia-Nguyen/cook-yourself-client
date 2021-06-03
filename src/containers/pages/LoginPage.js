@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
-    email: "bachnghianguyen@gmail.com",
-    password: "Nbn06121996",
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({
     email: "",

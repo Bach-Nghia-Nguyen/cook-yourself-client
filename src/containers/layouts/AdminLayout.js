@@ -1,6 +1,4 @@
 import React from "react";
-
-import { Container, Row, Col } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 
 import AlertMessage from "../../components/AlertMessage";
@@ -20,39 +18,24 @@ const AdminLayout = () => {
   return (
     <>
       <NavigationBar />
-      <Container className="page-container" fluid>
-        <Row>
-          <AdminSideMenu />
-          <Col>
-            <AlertMessage />
-            <Switch>
-              <Route exact path="/admin/profile" component={ProfilePage} />
-              <Route exact path="/admin/recipes" component={RecipeListPage} />
-              <Route
-                exact
-                path="/admin/recipes/:id"
-                component={RecipeDetailPage}
-              />
-              <Route
-                exact
-                path="/admin/recipe/add"
-                component={RecipeEditorPage}
-              />
-              <Route
-                exact
-                path="/admin/recipe/edit/:id"
-                component={RecipeEditorPage}
-              />
-              <Route
-                exact
-                path="/admin/list-of-users"
-                component={ListOfUsersPage}
-              />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </Col>
-        </Row>
-      </Container>
+      <div className="page-container dashboard">
+        <AdminSideMenu />
+
+        <AlertMessage />
+        <Switch>
+          <Route exact path="/user/profile" component={ProfilePage} />
+          <Route exact path="/user/recipes" component={RecipeListPage} />
+          <Route exact path="/user/recipes/:id" component={RecipeDetailPage} />
+          <Route exact path="/user/recipe/add" component={RecipeEditorPage} />
+          <Route
+            exact
+            path="/user/recipe/edit/:id"
+            component={RecipeEditorPage}
+          />
+          <Route exact path="/user/list-of-users" component={ListOfUsersPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </div>
       <Footer />
     </>
   );

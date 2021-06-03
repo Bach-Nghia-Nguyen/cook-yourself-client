@@ -1,50 +1,79 @@
 import React from "react";
-import { Row, Col, Navbar } from "react-bootstrap";
+import cookYourselfLogo from "../images/cook_yourself_white.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
-    <Navbar className="main-footer-container" expand="lg">
-      <Row className="row footer-site-links">
-        {/* Column 1 */}
-        <Col className="col-4 about-us">
-          <h4>Cook Yourself Inc</h4>
-          <ul className="list-unstyled">
-            <li>034xxxxx98</li>
-            <li>Ho Chi Minh City, Vietnam</li>
-            <li>346 Ben Van Don St, Ward 1, District 4.</li>
-          </ul>
-        </Col>
+    <footer className="web-footer">
+      <div className="footer-content">
+        <img src={cookYourselfLogo} alt="Cook Yourself Logo" width="270px" />
+        <p className="slogan">
+          Feel free to discover whatever the taste you love and share whatever
+          the dish you are the most proud of
+        </p>
 
-        {/* Column 2 */}
-        <Col className="col-3">
-          <h4>Something here</h4>
-          <ul className="list-unstyled">
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-          </ul>
-        </Col>
+        <ul className="socials">
+          <li>
+            {" "}
+            <a href="#facebook">
+              {" "}
+              <FontAwesomeIcon
+                icon={["fab", "facebook"]}
+                size="2x"
+                className="icon"
+                color="white"
+              />{" "}
+            </a>{" "}
+          </li>
 
-        {/* Column 3 */}
-        <Col className="col-3 policy">
-          <h4>Something here</h4>
-          <ul className="list-unstyled">
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-          </ul>
-        </Col>
-      </Row>
+          <li>
+            {" "}
+            <a href="#github">
+              {" "}
+              <FontAwesomeIcon
+                icon={["fab", "github"]}
+                size="2x"
+                color="white"
+                className="icon"
+              />{" "}
+            </a>{" "}
+          </li>
 
-      <hr />
+          <li>
+            {" "}
+            <a href="#youtube">
+              {" "}
+              <FontAwesomeIcon
+                icon={["fab", "youtube"]}
+                size="2x"
+                color="white"
+                className="icon"
+              />{" "}
+            </a>{" "}
+          </li>
 
-      <Row className="bottom-row">
-        <Col className="col-lg">
-          &copy;{new Date().getFullYear()} Cook Yourself Inc | All right
-          reserved | Term of Service | Privacy
-        </Col>
-      </Row>
-    </Navbar>
+          <li>
+            {" "}
+            <a href="#linkedin">
+              {" "}
+              <FontAwesomeIcon
+                icon={["fab", "linkedin"]}
+                size="2x"
+                color="white"
+                className="icon"
+              />{" "}
+            </a>{" "}
+          </li>
+        </ul>
+      </div>
+
+      <div className="footer-bottom">
+        <p className="copyright">
+          Copyright &copy; 2021 Cook Yourself. Designed by{" "}
+          <span>Nguyen Bach Nghia</span>{" "}
+        </p>
+      </div>
+    </footer>
   );
 };
 

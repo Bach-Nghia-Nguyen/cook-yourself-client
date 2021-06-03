@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, CardColumns } from "react-bootstrap";
+import { Container, CardColumns, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -10,9 +10,12 @@ import LandingJumbotron from "../../components/LandingJumbotron";
 import { recipeActions } from "../../redux/actions";
 
 import Preloader from "../../components/Preloader";
+import NewSearchBar from "../../components/NewSearchBar";
 
 const RecipesPage = () => {
   const [pageNum, setPageNum] = useState(1);
+  const [searchInputValue, setSearchInputValue] = useState("");
+  const [query, setQuery] = useState("");
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.recipe.loading);
   const recipes = useSelector((state) => state.recipe.recipes);
@@ -20,58 +23,72 @@ const RecipesPage = () => {
   // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const history = useHistory();
 
+  const handleSearchValueChange = (e) => {
+    setSearchInputValue(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setPageNum(1);
+    setQuery(searchInputValue);
+  };
+
   useEffect(() => {
-    dispatch(recipeActions.getRecipes(pageNum));
-  }, [dispatch, pageNum]);
+    dispatch(recipeActions.getRecipes(pageNum, 9, query));
+  }, [dispatch, pageNum, query]);
 
   const handleClickOnRecipe = (id) => {
     history.push(`/recipes/${id}`);
   };
 
   return (
-    <Container>
-      {/* <Jumbotron className="text-center">
-        <h1>Cook Yourself</h1>
-        <p>Wanna feel like a Masterchef? Try to cook those dishes!</p>
-        {isAuthenticated && (
-          <Link to="/recipe/add">
-            <Button variant="info">Add recipe</Button>
-          </Link>
-        )}
-      </Jumbotron> */}
-
+    <>
       <LandingJumbotron />
+      <Container className="recipes-page">
+        <NewSearchBar
+          search_keyword={searchInputValue}
+          handle_keyword_change={handleSearchValueChange}
+          handleSearchSubmit={handleSearchSubmit}
+        />
 
-      <PaginationBar
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        totalPageNum={totalPageNum}
-        loading={loading}
-      />
+        <PaginationBar
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          totalPageNum={totalPageNum}
+          loading={loading}
+        />
 
-      {loading ? (
-        <div className="text-center">
-          {/* <ClipLoader color="#f86c6b" size={150} loading={loading} /> */}
-          <Preloader />
-        </div>
-      ) : (
-        <>
-          {recipes.length ? (
-            <CardColumns>
-              {recipes.map((recipe) => (
-                <RecipeOutlineCard
-                  recipe={recipe}
-                  key={recipe._id}
-                  handleClick={handleClickOnRecipe}
-                />
-              ))}
-            </CardColumns>
+        <Row>
+          {loading ? (
+            <div className="text-center">
+              <Preloader />
+            </div>
           ) : (
-            <p>There is no recipe</p>
+            <>
+              {recipes.length ? (
+                <CardColumns className="recipe-list ">
+                  {recipes.map((recipe) => (
+                    <RecipeOutlineCard
+                      recipe={recipe}
+                      key={recipe._id}
+                      handleClick={handleClickOnRecipe}
+                    />
+                  ))}
+                </CardColumns>
+              ) : (
+                <p>There is no recipe</p>
+              )}
+            </>
           )}
-        </>
-      )}
-    </Container>
+        </Row>
+        <PaginationBar
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          totalPageNum={totalPageNum}
+          loading={loading}
+        />
+      </Container>
+    </>
   );
 };
 

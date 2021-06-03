@@ -1,36 +1,40 @@
-.ingredient-input-box {
+.recipe-editor-page {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.recipe-editor-page .ingredient-input-box {
   margin: 15px;
   display: flex;
   flex-direction: row;
 }
 
-.ingredient-input {
+.recipe-editor-page .ingredient-input {
   max-width: 220px;
 }
 
-.ingredient-input,
-.ingredient-remove-btn {
+.recipe-editor-page .ingredient-input,
+.recipe-editor-page .ingredient-remove-btn {
   margin-right: 30px;
 }
 
-.direction-input-box {
+.recipe-editor-page .direction-input-box {
   display: flex;
   flex-direction: row;
 }
 
-.direction-input {
+.recipe-editor-page .direction-input {
   max-width: 600px;
   margin-right: 10px;
 }
 
-.direction-btn-group {
+.recipe-editor-page .direction-btn-group {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.direction-remove-btn,
-.direction-add-btn {
+.recipe-editor-page .direction-remove-btn,
+.recipe-editor-page .direction-add-btn {
   width: 90px;
   padding: 3px 8px;
   border: none;
@@ -38,10 +42,10 @@
   color: white;
 }
 
-.direction-remove-btn {
+.recipe-editor-page .direction-remove-btn {
   background-color: brown;
 }
 
-.direction-add-btn {
+.recipe-editor-page .direction-add-btn {
   background-color: green;
 }

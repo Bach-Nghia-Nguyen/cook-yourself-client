@@ -7,7 +7,7 @@ import AdminLayout from "../layouts/AdminLayout";
 const Routes = (props) => {
   return (
     <Switch>
-      <PrivateRoute path="/admin" component={AdminLayout} />
+      <PrivateRoute path="/user" component={AdminLayout} />
       <Route path="/" component={PublicLayout} />
     </Switch>
   );

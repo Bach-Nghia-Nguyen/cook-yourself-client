@@ -25,8 +25,16 @@ import {
   faChartLine,
   faEye,
   faEyeSlash,
+  faHeart,
+  faComment,
 } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+  fab,
+  faFacebook,
+  faGithub,
+  faYoutube,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 
 library.add(
   fab,
@@ -43,12 +51,22 @@ library.add(
   faImage,
   faChartLine,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faFacebook,
+  faGithub,
+  faYoutube,
+  faLinkedin,
+  faHeart,
+  faComment
 );
 
 const App = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Tab, Nav, TabContainer } from "react-bootstrap";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { recipeActions } from "../../redux/actions";
@@ -14,6 +14,7 @@ import dishTypeLogo from "../../images/icons/dish-type.png";
 import Preloader from "../../components/Preloader";
 import CommentForm from "../../components/CommentForm";
 import CommentList from "../../components/CommentList";
+import ReactionEmoji from "../../components/ReactionEmoji";
 
 const RecipeDetailPage = () => {
   const params = useParams();
@@ -23,7 +24,7 @@ const RecipeDetailPage = () => {
   const subLoading = useSelector((state) => state.recipe.subLoading);
   const currentUser = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const history = useHistory();
+  // const history = useHistory();
   const [endIndex, setEndIndex] = useState(5);
   const moreOrLess = endIndex === 5 ? "more" : "less";
   const [commentText, setCommentText] = useState("");
@@ -44,9 +45,9 @@ const RecipeDetailPage = () => {
     }
   }, [dispatch, params]);
 
-  const handleGoBackClick = (e) => {
-    history.goBack();
-  };
+  // const handleGoBackClick = (e) => {
+  //   history.goBack();
+  // };
 
   const showMoreLessRow = () => {
     if (endIndex === 5) {
@@ -59,21 +60,6 @@ const RecipeDetailPage = () => {
 
   return (
     <div className="recipe-detail-page">
-      <div className="d-flex justify-content-between">
-        <Button onClick={handleGoBackClick}>
-          <FontAwesomeIcon icon="chevron-left" size="1x" /> Back
-        </Button>
-        {recipe?._id && currentUser?._id === recipe?.author?._id ? (
-          <Link to={`/recipe/edit/${recipe._id}`}>
-            <Button variant="info">
-              <FontAwesomeIcon icon="edit" size="1x" /> Edit
-            </Button>
-          </Link>
-        ) : (
-          <></>
-        )}
-      </div>
-
       {loading ? (
         <div className="text-center">
           <Preloader />
@@ -84,6 +70,18 @@ const RecipeDetailPage = () => {
             <div className="mb-5 detail-main-section">
               <header className="recipe-name">
                 <h4>{recipe.name}</h4>
+                {recipe?._id && currentUser?._id === recipe?.author?._id ? (
+                  <Link
+                    to={`/recipe/edit/${recipe._id}`}
+                    className="edit-recipe-btn"
+                  >
+                    <Button variant="info">
+                      <FontAwesomeIcon icon="edit" size="1x" /> Edit
+                    </Button>
+                  </Link>
+                ) : (
+                  <></>
+                )}
               </header>
 
               <section className="image-description">
@@ -98,14 +96,23 @@ const RecipeDetailPage = () => {
 
               <section className="author-time-serving">
                 <div className="recipe-author-info">
-                  <img
-                    src={recipe?.author?.avatarUrl}
-                    alt="Avatar"
-                    className="profile-picture-icon"
+                  <div>
+                    <img
+                      src={recipe?.author?.avatarUrl}
+                      alt="Avatar"
+                      className="profile-picture-icon"
+                    />
+                    <span className="text-muted author-name">
+                      {recipe?.author?.name}{" "}
+                    </span>
+                  </div>
+
+                  <ReactionEmoji
+                    reactionsData={recipe.reactions}
+                    targetType="Recipe"
+                    targetId={recipe._id}
+                    size="2x"
                   />
-                  <span className="text-muted author-name">
-                    {recipe?.author?.name}{" "}
-                  </span>
                 </div>
 
                 <div className="whitesmoke-info">

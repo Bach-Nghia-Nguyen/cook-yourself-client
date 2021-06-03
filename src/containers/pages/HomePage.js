@@ -12,12 +12,7 @@ const HomePage = () => {
     <div className="landing-page">
       <header>
         <img src={hero1} alt="hero1" />
-        <div className="title">
-          Welcome to Cook Yourself
-          <button type="button" className="start-button">
-            Get started
-          </button>
-        </div>
+        <div className="title">Welcome to Cook Yourself</div>
       </header>
 
       <section className="why-section">

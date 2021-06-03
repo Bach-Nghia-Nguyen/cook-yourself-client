@@ -9,7 +9,7 @@ const AdminSideMenu = () => {
         <Nav.Item>
           <Nav.Link
             as={NavLink}
-            to="/admin/profile"
+            to="/user/profile"
             activeClassName="active"
             strict={true}
           >
@@ -20,7 +20,7 @@ const AdminSideMenu = () => {
         <Nav.Item>
           <Nav.Link
             as={NavLink}
-            to="/admin/recipes"
+            to="/user/recipes"
             activeClassName="active"
             strict={true}
           >
@@ -28,7 +28,7 @@ const AdminSideMenu = () => {
           </Nav.Link>
         </Nav.Item>
 
-        <Nav.Item>
+        {/* <Nav.Item>
           <Nav.Link
             as={NavLink}
             to="/admin/list-of-users"
@@ -37,7 +37,7 @@ const AdminSideMenu = () => {
           >
             Users
           </Nav.Link>
-        </Nav.Item>
+        </Nav.Item> */}
       </div>
     </Nav>
   );

@@ -46,24 +46,31 @@ const RecipeEditorPage = () => {
   const recipeId = params.id;
 
   useEffect(() => {
-    if (recipeId) {
+    if (recipeId && addOrEdit === "Edit") {
       if (!selectedRecipe) {
         dispatch(recipeActions.getSingleRecipe(recipeId));
       }
-      setFormData((formData) => ({
-        ...formData,
-        name: selectedRecipe.name,
-        description: selectedRecipe.description,
-        images: selectedRecipe.images,
-        dish_type: selectedRecipe.dish_type,
-        preparation_time: selectedRecipe.preparation_time,
-        cooking_time: selectedRecipe.cooking_time,
-        portion: selectedRecipe.portion,
-        ingredients: selectedRecipe.ingredients,
-        directions: selectedRecipe.directions,
-      }));
+
+      if (selectedRecipe && selectedRecipe._id !== recipeId) {
+        dispatch(recipeActions.getSingleRecipe(recipeId));
+      }
+
+      if (selectedRecipe && selectedRecipe._id === recipeId) {
+        setFormData((formData) => ({
+          ...formData,
+          name: selectedRecipe.name,
+          description: selectedRecipe.description,
+          images: selectedRecipe.images,
+          dish_type: selectedRecipe.dish_type,
+          preparation_time: selectedRecipe.preparation_time,
+          cooking_time: selectedRecipe.cooking_time,
+          portion: selectedRecipe.portion,
+          ingredients: selectedRecipe.ingredients,
+          directions: selectedRecipe.directions,
+        }));
+      }
     }
-  }, [recipeId, selectedRecipe, dispatch]);
+  }, [recipeId, selectedRecipe, dispatch, addOrEdit]);
 
   const handleChange = (e) => {
     if (e.target.name === "images") {
@@ -262,7 +269,7 @@ const RecipeEditorPage = () => {
   }, [redirectTo, dispatch, history]);
 
   return (
-    <Container>
+    <Container className="recipe-editor-page">
       <h1 className="text-center">{addOrEdit} Recipe</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="recipeName">

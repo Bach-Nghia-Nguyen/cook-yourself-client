@@ -1,7 +1,7 @@
 .landing-page header img {
   display: block;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   object-fit: cover;
   filter: brightness(50%);
 
@@ -24,14 +24,6 @@
   font-size: 4rem;
 }
 
-.landing-page header .start-button {
-  border: none;
-  color: white;
-  background-color: lightgreen;
-  border-radius: 5px;
-  padding: 10px 25px;
-}
-
 .landing-page .why-section {
   height: 460px;
   background-color: rgb(186, 210, 221);
@@ -52,11 +44,13 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  /* border: 3px solid black; */
+  /* border: 2px solid black; */
   font-weight: 700;
 }
 
 .landing-page .why-section .why-card {
+  position: relative;
+  z-index: 10;
   border: 2px royalblue solid;
   border-radius: 10px;
   width: 220px;
@@ -80,6 +74,7 @@
   top: -72%;
   left: 70%;
   width: 300px;
+  /* z-index: -10; */
   /* border: 2px solid black; */
 }
 
@@ -109,6 +104,7 @@
 }
 
 .landing-page .grocery-section {
+  padding: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -121,4 +117,73 @@
   background-color: tomato;
   border-radius: 5px;
   padding: 10px 25px;
+}
+
+@media screen and (max-width: 990px) {
+  .landing-page .why-section article {
+    width: 550px;
+  }
+  .landing-page .recipe-section .right-side {
+    width: 470px;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 785px) {
+  .landing-page header .title {
+    font-weight: 400;
+  }
+  .landing-page .why-section {
+    height: 600px;
+  }
+  .landing-page .why-section article {
+    width: 500px;
+    flex-direction: column;
+    height: 500px;
+  }
+  .landing-page .why-section .hero2 {
+    left: 60%;
+  }
+
+  .landing-page .recipe-section .right-side h2 {
+    font-size: 25px;
+  }
+
+  .landing-page .grocery-section .hero4 {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .landing-page header .title {
+    font-size: 3.5rem;
+  }
+  .landing-page header img {
+    height: 80vh;
+  }
+
+  .landing-page .why-section .hero2 {
+    display: none;
+  }
+  .landing-page .why-section article {
+    width: 100%;
+  }
+
+  .landing-page .recipe-section {
+    height: 480px;
+    flex-direction: column;
+  }
+
+  .landing-page .recipe-section .right-side {
+    text-align: center;
+  }
+
+  .landing-page .grocery-section {
+    flex-direction: column-reverse;
+  }
+
+  .landing-page .grocery-section .left-side {
+    margin-top: 40px;
+    text-align: center;
+  }
 }

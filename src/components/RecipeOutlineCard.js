@@ -1,11 +1,16 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, CardImg } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const RecipeOutlineCard = ({ recipe, handleClick }) => {
   return (
-    <Card onClick={() => handleClick(recipe._id)} className="recipe-card">
-      <Card.Img
+    <Card
+      onClick={() => handleClick(recipe._id)}
+      className="recipe-outline-card mb-5"
+    >
+      <CardImg
         variant="top"
+        className="recipe-photo"
         src={
           recipe?.images?.length
             ? recipe.images[recipe.images.length - 1]
@@ -13,29 +18,32 @@ const RecipeOutlineCard = ({ recipe, handleClick }) => {
         }
       />
 
-      <Card.Body>
-        <Card.Title>{recipe.name}</Card.Title>
-        <Card.Text>
-          {recipe.description.length <= 99
-            ? recipe.description
-            : recipe.description.slice(0, 99) + "..."}
-        </Card.Text>
-      </Card.Body>
+      <div className="recipe-info">
+        <div className="name">
+          <h4>
+            {recipe.name.length >= 40
+              ? recipe.name.slice(0, 39) + "..."
+              : recipe.name}
+          </h4>
+          <img
+            src={recipe?.author?.avatarUrl}
+            alt="profile-icon"
+            className="profile-picture-icon"
+          />
+          <small>
+            <span className="author-name"> {recipe?.author?.name}</span>
+          </small>
+        </div>
 
-      <Card.Footer className="recipe-card-footer">
-        <img
-          src={recipe?.author?.avatarUrl}
-          alt="profile-icon"
-          className="profile-picture-icon"
-        />
-        <small className="text-muted">
-          <span className="text-muted author-name">
-            {" "}
-            {recipe?.author?.name}{" "}
-          </span>{" "}
-          wrote
-        </small>
-      </Card.Footer>
+        <div className="reaction-comment">
+          <p>
+            <FontAwesomeIcon icon="heart" size="2x" /> {recipe?.reactions?.love}
+          </p>
+          <p>
+            <FontAwesomeIcon icon="comment" size="2x" /> {recipe?.commentCount}
+          </p>
+        </div>
+      </div>
     </Card>
   );
 };
