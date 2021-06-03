@@ -119,9 +119,7 @@ const RecipeListPage = () => {
                 recipes.map((recipe) => (
                   <tr key={recipe._id}>
                     <td>
-                      <Link to={`/user/recipes/${recipe._id}`}>
-                        {recipe.name}
-                      </Link>
+                      <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
                     </td>
 
                     {/* <td>

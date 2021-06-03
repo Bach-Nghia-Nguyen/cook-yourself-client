@@ -11,6 +11,7 @@
 @import url("./stylesheets/pageStyles/recipeEditorPageStyles.css");
 @import url("./stylesheets/pageStyles/registerPageStyles.css");
 @import url("./stylesheets/pageStyles/recipesPageStyles.css");
+@import url("./stylesheets/pageStyles/productsPageStyles.css");
 
 /* component styles */
 @import url("./stylesheets/componentStyles/recipeOutlineCardStyles.css");

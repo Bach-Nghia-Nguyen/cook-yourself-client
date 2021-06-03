@@ -13,6 +13,7 @@ import RegisterPage from "../pages/RegisterPage";
 import RecipeEditorPage from "../pages/RecipeEditorPage";
 import RecipeDetailPage from "../pages/RecipeDetailPage";
 //import VerifyEmailPage from "../pages/VerifyEmailPage";
+import ProductsPage from "../pages/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
 import PrivateRoute from "../Routes/PrivateRoute";
@@ -27,6 +28,7 @@ const PublicLayout = () => {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/recipes" component={RecipesPage} />
+          <Route exact path="/products" component={ProductsPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/recipes/:id" component={RecipeDetailPage} />

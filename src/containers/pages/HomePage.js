@@ -45,9 +45,11 @@ const HomePage = () => {
       <section className="grocery-section">
         <div className="left-side">
           <h2>Buy ingredient online.</h2>
-          <button type="button" className="grocery-button">
-            Go to shop
-          </button>
+          <Link to="/products">
+            <button type="button" className="grocery-button">
+              Go to shop
+            </button>
+          </Link>
         </div>
         <img src={hero4} alt="hero4" className="hero4" />
       </section>
