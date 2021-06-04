@@ -94,9 +94,6 @@ const RegisterPage = () => {
 
           <Form onSubmit={handleSubmit}>
             <Form.Group className="upload-avatar">
-              {/* <button onClick={uploadWidget} >
-                Add avatar
-              </button> */}
               <div onClick={uploadWidget} className="upload-avatar-btn">
                 <img src={cameraIcon} alt="camera" className="camera-btn" />
               </div>
